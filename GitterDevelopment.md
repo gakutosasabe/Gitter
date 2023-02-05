@@ -46,5 +46,28 @@ npx create-react-app 任意のアプリケーション名
 npm start or yarn start
 ```
 - ブラウザでこの画面が表示されれば動作確認完了
-![picture 3](images/b4dabefdc31bbb132dfbd67cee3779da5c7a4d6e7d540596eeacd21499157888.png)  
+![picture 3](images/b4dabefdc31bbb132dfbd67cee3779da5c7a4d6e7d540596eeacd21499157888.png) 
 
+### Webサーバー側開発
+#### サーバーPC側とM5StickCの通信方式について
+- TCP/IP
+  - 通信が保証されるのでおすすめ
+- WebSocket
+  - ブラウザ側でも通信できる
+- UDP
+  - リアルタイムに通信したいならUDP
+
+- 今回はTCP/IPとする
+#### Node側とM5StickCでTCP/IP通信を行う
+##### Node側(サーバーモード)
+- Node.jsでTCP/IP通信を行うにはnetモジュールが必要．下記コマンドでインストールする
+```
+npm install net
+```
+
+## 参考情報
+- Node.jsとArduinoでプロトタイプ作成
+  - https://html5experts.jp/girlie_mac/17684/
+- Platform IOでマイコン開発ができる
+- Nodeを使ったTCP/IP通信
+  - https://hikoleaf.hatenablog.jp/entry/2019/06/09/131620
