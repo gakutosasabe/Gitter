@@ -17,9 +17,10 @@
   - Webサーバーに練習情報をPush
 - ギタースタンド
   - M5 Stack C plusを固定する（３Dプリンターでアタッチメントを自作）
-- Webサーバー（バックエンド）
-  - M5 stack C plusから受け取った練習情報をもとにGithub風Webページを更新
-- Webサーバー
+- クライアント（React）
+  - サーバーから受け取った練習情報をもとにGithub風Webページを更新
+- サーバー (Node.js)
+  - M5 stack C plusから受け取った練習情報をまとめてクライアント側に渡す
 ## 開発
 ### React + Javascriptの環境構築
   - https://utubou-tech.com/react-javascript-env/
@@ -30,10 +31,11 @@
 - コマンドプロンプトで"node- v"と入力
 ![picture 2](images/ba2601a27802eece13efbbf1a5fe36d7542bee8116e4207e88496b01fe4d774e.png)  
 
+### クライアント側開発
 #### Reactアプリを作成する
 - 任意のフォルダでコマンドプロンプトから下記コマンドを実行してアプリケーションを作成
 ```
-npx create-react-app 任意のアプリケーション名
+npx create-react-app 任意のアプリケーション名(今回はclient)
 ```
 ※アプリケーション名に大文字は使えないので注意
 
@@ -48,7 +50,18 @@ npm start or yarn start
 - ブラウザでこの画面が表示されれば動作確認完了
 ![picture 3](images/b4dabefdc31bbb132dfbd67cee3779da5c7a4d6e7d540596eeacd21499157888.png) 
 
-### Webサーバー側開発
+### サーバー側開発
+#### Node.jsの初期設定
+- 任意のフォルダでコマンドプロンプトで下記コマンドを実行してpackage.jsonを作る
+```
+npm init --yes
+```
+- 必要なモジュールをインストールする
+```
+npm install express nodemon
+```
+Express : フレームワーク
+nodemon : ソースを監視して、自動でサーバーを再起動してくれるツール
 #### サーバーPC側とM5StickCの通信方式について
 - TCP/IP
   - 通信が保証されるのでおすすめ
@@ -71,3 +84,5 @@ npm install net
 - Platform IOでマイコン開発ができる
 - Nodeを使ったTCP/IP通信
   - https://hikoleaf.hatenablog.jp/entry/2019/06/09/131620
+- React+Node.js(Express)でMySQL連携する
+  - https://qiita.com/nemutya/items/b4c606168aa5be610e1e
