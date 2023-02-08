@@ -56,12 +56,40 @@ npm start or yarn start
 ```
 npm init --yes
 ```
+#### Expressを使用してバックエンドサーバーを構築する
 - 必要なモジュールをインストールする
 ```
 npm install express nodemon
 ```
 Express : フレームワーク
 nodemon : ソースを監視して、自動でサーバーを再起動してくれるツール
+
+- myfirst.jsというスクリプトを書く（名前は何でもいい）
+```javascript
+var express = require('express');
+
+//expressのインスタンスを作成
+const app = express();
+
+//ポート番号を指定
+const port = 3000;
+
+//'/'パスにget要求があった際に実行する処理
+app.get('/',(req, res) => {
+    res.send('Hello World!');
+});
+
+//3000ポートでlisten
+app.listen(port, () => {
+    console.log(`listening on *:${port}`);
+})
+```
+- "node myfirst.js"をコマンドプロンプトで実行
+- localhost:3000にアクセスして"Hello world"と表示されれば成功
+
+#### APIエンドポイントの作成
+- クライアント側(React)からサーバー(node.js)にアクセスする際の，サクセス先（エンドポイント）をサーバー側に準備する
+ 
 #### サーバーPC側とM5StickCの通信方式について
 - TCP/IP
   - 通信が保証されるのでおすすめ
