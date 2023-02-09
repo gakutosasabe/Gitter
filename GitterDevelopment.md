@@ -87,9 +87,24 @@ app.listen(port, () => {
 - "node myfirst.js"をコマンドプロンプトで実行
 - localhost:3000にアクセスして"Hello world"と表示されれば成功
 
-#### APIエンドポイントの作成
-- クライアント側(React)からサーバー(node.js)にアクセスする際の，サクセス先（エンドポイント）をサーバー側に準備する
- 
+##### APIエンドポイントの作成
+- クライアント側(React)からサーバー(node.js)にアクセスする際の，アクセス先（エンドポイント）をサーバー側に準備する
+```
+//'/api'パスにget要求があった際に実行する処理
+app.get('/api',(req, res) => {
+    res.send('From Node.js Call');
+});
+```
+##### nodemonでファイル変更時にサーバーを自動再起動するようにする
+- package.jsonの記述を以下のように変更する
+```
+#変更前
+"start-node": "node backend/index.js"
+
+#変更後
+"start-node": "nodemon backend/index.js"
+```
+
 #### サーバーPC側とM5StickCの通信方式について
 - TCP/IP
   - 通信が保証されるのでおすすめ
@@ -105,6 +120,12 @@ app.listen(port, () => {
 ```
 npm install net
 ```
+
+### バックエンドとフロントエンドを接続
+- クライアント(React)からサーバー(Express)にアクセスしてデータを取得
+- React側からNode.js側のエンドポイント(localhost:3001/api)にアクセスしてJSONデータを取得してReact側で表示する
+- データの保持・取得にはReactのHookであるuseStateとuseEffect,fetchメソッドを使用する．
+
 
 ## 参考情報
 - Node.jsとArduinoでプロトタイプ作成
