@@ -50,6 +50,39 @@ npm start or yarn start
 - ブラウザでこの画面が表示されれば動作確認完了
 ![picture 3](images/b4dabefdc31bbb132dfbd67cee3779da5c7a4d6e7d540596eeacd21499157888.png) 
 
+#### client側でNode.js側から通信を受け取る
+- App.jsのコードは以下に編集する
+``` javascript
+import './App.css';
+import { useState,useEffect } from 'react';
+
+function App() {
+  //useStateの初期値(空)を設定
+  const [message, setMessage] = useState('');
+
+  useEffect(() => {
+    //fetchでバックエンドExpressのサーバーを指定
+    fetch('/api')
+      .then((res) => res.json())
+      //生成したjsオブジェクトをdataに代入
+      //data.messageで取り出したデータをuseStateに保存
+      .then((data) => setMessage(data.message));
+  })
+  
+  
+  return (
+    <div className="App">
+      <h1>Gitter</h1>
+      <p>{ message }</p>
+    </div>
+  );
+}
+
+export default App;
+```
+- useEffect : Reactプリケーションの状態が変更されたときに実行される関数
+- useState : Reactアプリケーションの状態を扱うためのもの
+- fetch : URLを指定してサーバーと通信するもの
 ### サーバー側開発
 #### Node.jsの初期設定
 - 任意のフォルダでコマンドプロンプトで下記コマンドを実行してpackage.jsonを作る
@@ -66,6 +99,7 @@ nodemon : ソースを監視して、自動でサーバーを再起動してく�
 
 - myfirst.jsというスクリプトを書く（名前は何でもいい）
 ```javascript
+// ---- ReactのためのExpressサーバー
 var express = require('express');
 
 //expressのインスタンスを作成
@@ -104,6 +138,10 @@ app.get('/api',(req, res) => {
 #変更後
 "start-node": "nodemon backend/index.js"
 ```
+-これで以下コマンドでサーバーを立ち上げられるようになる
+```
+npm run start-node
+```
 
 #### サーバーPC側とM5StickCの通信方式について
 - TCP/IP
@@ -114,19 +152,43 @@ app.get('/api',(req, res) => {
   - リアルタイムに通信したいならUDP
 
 - 今回はTCP/IPとする
-#### Node側とM5StickCでTCP/IP通信を行う
-##### Node側(サーバーモード)
-- Node.jsでTCP/IP通信を行うにはnetモジュールが必要．下記コマンドでインストールする
-```
-npm install net
-```
 
 ### バックエンドとフロントエンドを接続
 - クライアント(React)からサーバー(Express)にアクセスしてデータを取得
 - React側からNode.js側のエンドポイント(localhost:3001/api)にアクセスしてJSONデータを取得してReact側で表示する
 - データの保持・取得にはReactのHookであるuseStateとuseEffect,fetchメソッドを使用する．
 
+#### Node側とM5StickCでTCP/IP通信を行う
+##### Node側(サーバーモード)
+- Node.jsでTCP/IP通信を行うにはnetモジュールが必要．下記コマンドでインストールする
+```
+npm install net
+```
+##### Node側のTCP/IPサーバーを立てる
+- ポート3000はReact，ポート3001はExpressサーバーが使っているので，ポート3002を使う
+- コードは以下
 
+``` javascript
+// ---- M5 stickのためのTCPサーバー
+const net = require("net")
+
+const server= net.createServer(socket => {
+    socket.on('data', data => {
+        console.log(data + 'from' + socket.remoteAddress + ':' + socket.remotePort);
+        socket.write('server -> Repeating' + data);
+    });
+
+    socket.on('close', () =>{
+        console.log('client closed connection');
+    });
+}).listen(3002);
+
+console.log('TCP/IP server listening on port 3002');
+```
+
+### M5 Stick側開発
+#### 環境構築
+- Platform I/OはVS Codeの拡張機能で，Extensionから即インストールできる
 ## 参考情報
 - Node.jsとArduinoでプロトタイプ作成
   - https://html5experts.jp/girlie_mac/17684/
@@ -135,3 +197,5 @@ npm install net
   - https://hikoleaf.hatenablog.jp/entry/2019/06/09/131620
 - React+Node.js(Express)でMySQL連携する
   - https://qiita.com/nemutya/items/b4c606168aa5be610e1e
+- Platform I/Oでマイコン開発
+  - https://qiita.com/JotaroS/items/1930f156aab953194c9a
