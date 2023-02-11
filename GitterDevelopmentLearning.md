@@ -189,6 +189,33 @@ console.log('TCP/IP server listening on port 3002');
 ### M5 Stick側開発
 #### 環境構築
 - Platform I/OはVS Codeの拡張機能で，Extensionから即インストールできる
+- NewProjectから新しいプロジェクトを作成する
+  - BoardをM5stick-Cを選択
+  - FrameworkはArduino
+  - Finishを押下すると新しいPlatformI/Oのプロジェクトが生成される
+#### 実装
+- src/にmain.cppがある
+ ![M5](20230211174358.png)  
+- Helloworldを表示するプログラムを書く
+- M5stickCを選択したはずなのに#include<Arduino.h>となっているので，#include<M5stickCPlus.h>に書き換える
+```Arduino
+#include <M5stickCPlus.h>
+
+void setup() {
+  // put your setup code here, to run once:
+  M5.begin();
+
+  M5.Lcd.print("Hello World");
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+}
+```
+- M5Stickのライブラリを使用するにはplatform.iniに以下のように記載を追加する必要がある
+  ![platform](20230211174432.png)  
+- platform IOのタブに移動するとPROJECT TASKSの中にBuild,Uploadなどのボタンがある．Build→Uploadの順に実行する
+- M5stickCplusの液晶にHelloworldと出たらOK
 ## 参考情報
 - Node.jsとArduinoでプロトタイプ作成
   - https://html5experts.jp/girlie_mac/17684/
@@ -199,3 +226,5 @@ console.log('TCP/IP server listening on port 3002');
   - https://qiita.com/nemutya/items/b4c606168aa5be610e1e
 - Platform I/Oでマイコン開発
   - https://qiita.com/JotaroS/items/1930f156aab953194c9a
+- Platform I/OでM5stickC開発
+  - https://elchika.com/article/dcc4fd0f-f439-4387-961e-c7d2f903bd4d/
