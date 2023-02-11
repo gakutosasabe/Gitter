@@ -216,6 +216,9 @@ void loop() {
   ![platform](20230211174432.png)  
 - platform IOのタブに移動するとPROJECT TASKSの中にBuild,Uploadなどのボタンがある．Build→Uploadの順に実行する
 - M5stickCplusの液晶にHelloworldと出たらOK
+
+#### ジャイロセンサーと加速度センサーからM5StickCPlusの回転角傾きを算出する
+
 ## 参考情報
 - Node.jsとArduinoでプロトタイプ作成
   - https://html5experts.jp/girlie_mac/17684/
@@ -228,3 +231,7 @@ void loop() {
   - https://qiita.com/JotaroS/items/1930f156aab953194c9a
 - Platform I/OでM5stickC開発
   - https://elchika.com/article/dcc4fd0f-f439-4387-961e-c7d2f903bd4d/
+- M5stack 公式API
+  - https://docs.m5stack.com/en/api/stickc/imu
+- M5Stickで傾き角度算出
+  - https://garchiving.com/calculate-angle-of-3axis-rotation-in-6axis-sensor/
