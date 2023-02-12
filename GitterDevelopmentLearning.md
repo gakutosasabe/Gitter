@@ -216,6 +216,38 @@ void loop() {
   ![platform](20230211174432.png)  
 - platform IOのタブに移動するとPROJECT TASKSの中にBuild,Uploadなどのボタンがある．Build→Uploadの順に実行する
 - M5stickCplusの液晶にHelloworldと出たらOK
+#### TCP/IP通信を行う
+- 通信するポートの設定などを行う
+```
+const int port = 3002; //サーバー側ポート
+const IPAddress local_ip(192,168,0,30); //M5Stick IPAddress
+const IPAddress server_ip(192,168,0,26); //PC IPAdress
+const IPAddress subnet(255,255,255,0);
+WiFiClient client;
+```
+- TCPIPのクライアント側の設定をsetup()の中で行う
+```Arduino
+
+//TCP/IP Client設定
+WiFi.softAP(ssid,password);
+delay(100);
+WiFi.softAPConfig(local_ip, local_ip, subnet);
+M5.Lcd.print("AP IP address:");
+IPAddress myIP = WiFi.softAPIP();
+M5.Lcd.println(myIP);
+
+//サーバー接続
+M5.Lcd.print("\r\nLocal port: ");
+M5.Lcd.println(port);
+client.connect(server_ip, port);
+```
+- loop()の中でデータを送信する
+```
+char write_data[1];
+write_data[0] = 'a';
+client.write(write_data, 1);
+```
+- node.jsのサーバーを立ち上げて，コンソールにデータが届いているか確認する
 
 #### ジャイロセンサーと加速度センサーからM5StickCPlusの回転角傾きを算出する
 
@@ -235,3 +267,5 @@ void loop() {
   - https://docs.m5stack.com/en/api/stickc/imu
 - M5Stickで傾き角度算出
   - https://garchiving.com/calculate-angle-of-3axis-rotation-in-6axis-sensor/
+- ESP32マイコンとPCでTCP/IP通信する方法
+  - https://qiita.com/chibi314/items/828fdedee369ef969af9
