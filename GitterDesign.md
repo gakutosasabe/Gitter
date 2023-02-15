@@ -3,6 +3,12 @@
   - ちゃんと静的モデリングするか～
 # 構成
 ![picture 1](images/gitter.drawio.svg)  
+# コンテキスト図
+![context](images/context.drawio.svg)
+
+# DFD0
+![DFD0](images/DFD0.drawio.svg)
+
 # データ設計
 ## M5stack⇔TCP/IPサーバー(Node.js)間
 | 項目 |値|行先|備考|
@@ -16,4 +22,5 @@
 |:--:|:--|:--:|:--|
 |ギター練習情報|{<br>"practice_start_time":yyyy/mm/dd hh/mm/ss<br>"practice_end_time":yyyy/mm/dd hh/mm/ss}|Express→React|{<br>"practice_start_time":2023/07/22 17:56:39 <br>"practice_end_time":2023/07/23 18:09:32}|
 |デバイス情報|{<br>"battery":バッテリー情報<br>}|Express→React|{<br>"battery":90<br>}|
+
 
