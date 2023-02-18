@@ -9,6 +9,8 @@
 # DFD0
 ![DFD0](images/DFD0.drawio.svg)
 
+# モジュール構造図
+![Module](images/module.drawio.svg)
 # データ設計
 ## M5stack⇔TCP/IPサーバー(Node.js)間
 | 項目 |値|行先|備考|
