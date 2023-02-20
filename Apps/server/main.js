@@ -1,5 +1,5 @@
-// ---- ReactのためのExpressサーバー
 var express = require('express');
+const net = require("net")
 
 //expressのインスタンスを作成
 const app = express();
@@ -22,13 +22,12 @@ app.listen(port, () => {
     console.log(`Express server listening on *:${port}`);
 })
 
-// ---- M5 stickのためのTCPサーバー
-const net = require("net")
-
+//3002ポートでTCP/IPサーバーを立ち上げ
 const server= net.createServer(socket => {
     socket.on('data', data => {
         console.log(data + 'from' + socket.remoteAddress + ':' + socket.remotePort);
         socket.write('server -> Repeating' + data);
+        const message = data.toString(); 
     });
 
     socket.on('close', () =>{
