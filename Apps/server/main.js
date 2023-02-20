@@ -28,6 +28,14 @@ const server= net.createServer(socket => {
         console.log(data + 'from' + socket.remoteAddress + ':' + socket.remotePort);
         socket.write('server -> Repeating' + data);
         const message = data.toString(); 
+        const splitarray = message.split(':');
+
+        if (splitarray.length === 2) {
+            const guitter_detect = splitarray[0];
+            const time_stamp = splitarray[1];
+          } else {
+            console.log("Symbol not found or not in expected format");
+          }
     });
 
     socket.on('close', () =>{
