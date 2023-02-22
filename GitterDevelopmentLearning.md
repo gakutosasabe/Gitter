@@ -83,6 +83,16 @@ export default App;
 - useEffect : Reactプリケーションの状態が変更されたときに実行される関数
 - useState : Reactアプリケーションの状態を扱うためのもの
 - fetch : URLを指定してサーバーと通信するもの
+
+### Git風のHeatmapを作成する
+- 色々ライブラリはあるが，ちゃんとD3.jsを使ってやってみる
+#### D3.jsのインストール
+- Reactアプリ直下で以下コマンドを実行する
+```
+npm install d3 --save
+```
+
+
 ### サーバー側開発
 #### Node.jsの初期設定
 - 任意のフォルダでコマンドプロンプトで下記コマンドを実行してpackage.jsonを作る
@@ -269,3 +279,7 @@ client.write(write_data, 1);
   - https://garchiving.com/calculate-angle-of-3axis-rotation-in-6axis-sensor/
 - ESP32マイコンとPCでTCP/IP通信する方法
   - https://qiita.com/chibi314/items/828fdedee369ef969af9
+- D3.jsでGithub風草をはやす
+  - https://qiita.com/snaka/items/7f4e5653496689077ce5
+- React+D3.jsの基本
+  - https://qiita.com/sand/items/4090fc9e93ff81180fdf
