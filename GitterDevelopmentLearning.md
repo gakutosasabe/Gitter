@@ -260,7 +260,11 @@ client.write(write_data, 1);
 - node.jsのサーバーを立ち上げて，コンソールにデータが届いているか確認する
 
 #### ジャイロセンサーと加速度センサーからM5StickCPlusの回転角傾きを算出する
-
+- とりあえず以下を参考にカルマンフィルタを使ってM5StickPlusの回転角を出す感じにする
+  - https://qiita.com/NoriMasaTot/items/18875c4ce696919ebe3b
+- モデル的なところはおいおい勉強するとして今回はライブラリを使う
+  - https://shiker.hatenablog.com/entry/2019/08/24/004637
+- 初期補正しなくても使えそう
 ## 参考情報
 - Node.jsとArduinoでプロトタイプ作成
   - https://html5experts.jp/girlie_mac/17684/

@@ -1,6 +1,7 @@
 import './App.css';
 import { useState,useEffect } from 'react';
 
+
 function App() {
   //useStateの初期値(空)を設定
   const [message, setMessage] = useState('');
