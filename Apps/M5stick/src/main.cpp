@@ -1,10 +1,16 @@
 #include <M5stickCPlus.h>
 #include <Wifi.h>
 #include <Kalman.h>
+#include <time.h>
+#define JST     3600* 9
 
-const char* ssid = "IODATA-1ac424-2G";
-const char* password = "ML1t276448355";
 
+//自宅
+//const char* ssid = "IODATA-1ac424-2G";
+//const char* password = "ML1t276448355";
+//らぼ
+const char* ssid = "ailabnet_2G";
+const char* password = "letsgettogether";
 
 const int port = 3002; //サーバー側ポート
 const IPAddress local_ip(192,168,0,30); //M5Stick IPAddress
@@ -12,11 +18,11 @@ const IPAddress server_ip(192,168,0,26); //PC IPAdress
 const IPAddress subnet(255,255,255,0);
 WiFiClient client;
 
-//加速度センサー・ジャイロセンサーの値
+//加速度センサー・ジャイロセンサーの値(x,y,zの順番)
 float acc[3];
 float gyro[3];
 
-//カルマンフィルター後の角度情報
+//カルマンフィルター後の角度情報等
 float kal_angle_x;
 float kal_angle_y;
 
@@ -28,6 +34,11 @@ long tick = 0;
 
 //Guitter検出情報
 bool guiterDetect = false; // 0がOFF,1がON
+bool lastGuiterDetect = false; //前回のギター検出情報
+
+//時刻取得関係
+time_t t;
+struct tm *tm;
 
 //IMUからデータ取得
 void readGyro(){
@@ -66,6 +77,29 @@ bool detectGuiter(float angle){
   
 }
 
+//現在時刻取得
+String timeGet(){
+  t = time(NULL);
+  tm = localtime(&t);
+  String yyyy = String(tm->tm_year+1900);
+  String mm = String(tm->tm_mon+1);
+  String dd = String(tm->tm_mday);
+  String hh = String(tm->tm_hour);
+  String min = String(tm->tm_min);
+  String ss = String(tm->tm_sec);
+  String time = String(yyyy + "/" + mm + "/" + dd + " " + hh +":" + min + ":" + ss);
+  return time;
+}
+
+//送信データ作成
+String dataCreate(bool detect_guiter){
+  if(detect_guiter == false){
+    return String("OFF " + timeGet());
+  }else{
+    return String("ON " + timeGet());
+  }
+}
+
 void setup() {
   //初期化
   M5.begin();
@@ -95,6 +129,9 @@ void setup() {
   M5.Lcd.print("\r\nWiFi connected\r\nIP address: ");
   M5.Lcd.println(WiFi.localIP());
 
+  //時刻同期の設定
+  configTime( JST, 0, "ntp.nict.jp", "ntp.jst.mfeed.ad.jp");
+
   //サーバー接続
   M5.Lcd.print("\r\nLocal port: ");
   M5.Lcd.println(port);
@@ -115,7 +152,6 @@ void loop() {
   kal_angle_y = kalmanY.getAngle(pitch, gyro[1], dt);
   
   guiterDetect = detectGuiter(kal_angle_y);
-  Serial.println(guiterDetect);
   
   //20回に一回だけ描画
   tick++;
@@ -123,10 +159,20 @@ void loop() {
     tick = 0;
     draw();
   }
-  //TCP/IPでデータ送信
-  char write_data[1];
-  write_data[0] = 'a';
-  client.write(write_data, 1);
+
+  if(guiterDetect != lastGuiterDetect){
+    //送信データ作成
+    String data = dataCreate(guiterDetect);
+    int len = data.length() + 10;
+    char tcpdata[len];
+    data.toCharArray(tcpdata,len); //dataをtcpdataにchar型でコピー
+    client.write(tcpdata,len); //データをTCP/IP通信で送信
+    Serial.println(tcpdata);
+  }
+
+
+  //ギター検出情報を更新
+  lastGuiterDetect = guiterDetect;
 
   delay(2);
 }

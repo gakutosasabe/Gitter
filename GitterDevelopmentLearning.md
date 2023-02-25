@@ -223,7 +223,15 @@ void loop() {
 }
 ```
 - M5Stickのライブラリを使用するにはplatform.iniに以下のように記載を追加する必要がある
-  ![platform](20230211174432.png)  
+- M5Stick-cに併せてモニタースピードは115200とする．
+```
+[env:m5stick-c]
+platform = espressif32
+lib_deps = M5StickCPlus
+board = m5stick-c
+framework = arduino
+monitor_speed = 115200
+```
 - platform IOのタブに移動するとPROJECT TASKSの中にBuild,Uploadなどのボタンがある．Build→Uploadの順に実行する
 - M5stickCplusの液晶にHelloworldと出たらOK
 #### TCP/IP通信を行う
@@ -265,6 +273,13 @@ client.write(write_data, 1);
 - モデル的なところはおいおい勉強するとして今回はライブラリを使う
   - https://shiker.hatenablog.com/entry/2019/08/24/004637
 - 初期補正しなくても使えそう
+#### Arduinoで現在時刻を取得する
+- time.hを使用する
+  - https://www.autumn-color.com/archives/839
+  - https://www.denshi.club/cookbook/arduino/esp32/esp321-esp327.html
+#### ArduinoStringからCharへの変換
+- https://doubtpad.hatenablog.com/entry/2020/09/28/015028
+- stringからCharへ変換するときは長さを＋１する必要があるらしい
 ## 参考情報
 - Node.jsとArduinoでプロトタイプ作成
   - https://html5experts.jp/girlie_mac/17684/
