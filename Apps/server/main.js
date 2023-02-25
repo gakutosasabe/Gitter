@@ -23,9 +23,13 @@ app.listen(port, () => {
     console.log(`Express server listening on *:${port}`);
 })
 
-//JSONファイルを読み込み
-const data = fs.readFileSync('guiter_detect.json');
-const json_detect_file = JSON.parse(data); 
+let guiter_detect_array = [];
+
+try {
+  guiter_detect_array = JSON.parse(fs.readFileSync('guiter_detect.json', 'utf8'));
+} catch (err) {
+  console.error(err);
+}
 
 //3002ポートでTCP/IPサーバーを立ち上げ
 const server= net.createServer(socket => {
@@ -33,24 +37,39 @@ const server= net.createServer(socket => {
         console.log(data + 'from' + socket.remoteAddress + ':' + socket.remotePort);
         socket.write('server -> Repeating' + data);
         const message = data.toString(); 
-        const splitarray = message.split(':');
+        const splitarray = message.split('-');
+        console.log(splitarray);
 
         if (splitarray.length === 2) {
             const guitter_detect = splitarray[0];
+            console.log(guitter_detect);
             const time_stamp = splitarray[1];
+            console.log(time_stamp);
             let detect_info = {guiter_detect : guitter_detect, time : time_stamp}; //object型でJSONの内容を定義
-            let json_detect_info = JSON.stringify(detect_info); //jsonに変換
-            json_detect_file.unshift(json_detect_info); //guiter_detect.jsonの先頭に追加
-            fs.writeFileSync('guiter_detect.json', JSON.stringify(json_detect_file));//書き込み
+            console.log(JSON.stringify(detect_info));
+            guiter_detect_array.push(detect_info); //guiter_detect.jsonの先頭に追加
+            console.log(guiter_detect_array);
             
-          } else {
-            console.log("Symbol not found or not in expected format");
-          }
+            fs.writeFile('guiter_detect.json', JSON.stringify(guiter_detect_array, null, '    '), (err) => {
+                if (err) throw err;
+                console.log('The file has been saved!');
+              });
+        //    fs.writeFileSync('guiter_detect.json', JSON.stringify(json_detect_file));//書き込み
+            
+        //  } else {
+        //    console.log("Symbol not found or not in expected format");
+        }
+    
     });
 
     socket.on('close', () =>{
-        console.log('client closed connection');
+        //console.log('client closed connection');
     });
+
+    socket.on('error', ()=>{
+        //console.log('something error');
+    })
+
 }).listen(3002);
 
 console.log('TCP/IP server listening on port 3002');

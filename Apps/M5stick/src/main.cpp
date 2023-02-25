@@ -13,8 +13,8 @@ const char* ssid = "ailabnet_2G";
 const char* password = "letsgettogether";
 
 const int port = 3002; //サーバー側ポート
-const IPAddress local_ip(192,168,0,30); //M5Stick IPAddress
-const IPAddress server_ip(192,168,0,26); //PC IPAdress
+const IPAddress local_ip(192,168,1,17); //M5Stick IPAddress
+const IPAddress server_ip(192,168,1,113); //PC IPAdress
 const IPAddress subnet(255,255,255,0);
 WiFiClient client;
 
@@ -94,9 +94,9 @@ String timeGet(){
 //送信データ作成
 String dataCreate(bool detect_guiter){
   if(detect_guiter == false){
-    return String("OFF " + timeGet());
+    return String("OFF-" + timeGet());
   }else{
-    return String("ON " + timeGet());
+    return String("ON-" + timeGet());
   }
 }
 
@@ -163,17 +163,25 @@ void loop() {
   if(guiterDetect != lastGuiterDetect){
     //送信データ作成
     String data = dataCreate(guiterDetect);
-    int len = data.length() + 10;
+    int len = data.length() + 1;
     char tcpdata[len];
     data.toCharArray(tcpdata,len); //dataをtcpdataにchar型でコピー
     client.write(tcpdata,len); //データをTCP/IP通信で送信
     Serial.println(tcpdata);
   }
+  
+  //Expressサーバーとの通信が切れてたらもう一度つなぎにいく
+  if(!client.connect(server_ip, port)){
+    client.connect(server_ip, port);
+  } 
+  
+
+
 
 
   //ギター検出情報を更新
   lastGuiterDetect = guiterDetect;
 
-  delay(2);
+  delay(200);
 }
 

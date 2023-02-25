@@ -15,7 +15,7 @@
 ## M5stack⇔TCP/IPサーバー(Node.js)間
 | 項目 |値|行先|備考|
 |:--:|:--:|:--:|:--:|
-|ギター検出情報|ON/OFF:yyyy/mm/dd_hh/mm/ss| M5→Express|ギター検出情報とタイムスタンプは一緒に送信|
+|ギター検出情報|ON/OFF-yyyy/mm/dd hh:mm:ss| M5→Express|ギター検出情報とタイムスタンプは一緒に送信|
 |バッテリー容量|battery:〇〇| M5→Express||
 
 ## Expressサーバー(Node.js)⇔React間
