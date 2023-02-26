@@ -44,6 +44,7 @@ const server= net.createServer(socket => {
             const guitter_detect = splitarray[0];
             console.log(guitter_detect);
             const time_stamp = splitarray[1];
+            time_stamp = time_stamp.replace("\u0000","");//不要部分を削除
             console.log(time_stamp);
             let detect_info = {guiter_detect : guitter_detect, time : time_stamp}; //object型でJSONの内容を定義
             console.log(JSON.stringify(detect_info));
