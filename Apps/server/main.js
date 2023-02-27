@@ -15,7 +15,7 @@ app.get('/',(req, res) => {
 
 //'/api'パスにGET要求があった際に実行する処理
 app.get('/api', (req, res) => {
-    res.json({message: "From Node.js Message"});
+    res.json(guiter_detect_array);//ローカルのJSONファイルを読み込んでそのまま送信する
   });
 
 //3000ポートでlisten
