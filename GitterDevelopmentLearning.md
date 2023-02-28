@@ -96,104 +96,26 @@ export default App;
   - https://github.com/d3/d3/wiki/Gallery
 #### 基本
 - https://www.indetail.co.jp/blog/170517/
+- 要素(body等)を捕まえて直接属性を書き換えるのがDOMのイメージか・・
+- https://panasonic-cns.udemy.com/course/masteringd3js/learn/lecture/8081980#overview
+- 著者のGit
+  - https://github.com/adamjanes/udemy-d3
+  - さすがに今回はUdemyやるか・・・
+- append
+  - SVGの要素を追加する
+- attr
+  - SVGの属性を追加する（色など）
+- select
+  - HTMLから要素を指定する
+- メソッドチェーン
+  - 要素を繋げてselect,append,attrを一気に行う
 #### D3.jsのインストール
 - Reactアプリ直下で以下コマンドを実行する
 ```
 npm install d3 --save
 ```
 - https://zenn.dev/ignorant_kenji/articles/76dab0a748516470452b
-- この記事を元に円グラフを書いてみる
-``` javascript
-import React, { useEffect, useRef } from "react";
-import * as d3 from "d3";
-
-const Pie = props => {
-  const ref = useRef(null);
-  const cache = useRef(props.data);
-  const createPie = d3
-    .pie()
-    .value(d => d.value)
-    .sort(null);
-  const createArc = d3
-    .arc()
-    .innerRadius(props.innerRadius)
-    .outerRadius(props.outerRadius);
-  const colors = d3.scaleOrdinal(d3.schemeCategory10);
-  const format = d3.format(".2f");
-
-  useEffect(
-    () => {
-      const data = createPie(props.data);
-      const prevData = createPie(cache.current);
-      const group = d3.select(ref.current);
-      const groupWithData = group.selectAll("g.arc").data(data);
-
-      groupWithData.exit().remove();
-
-      const groupWithUpdate = groupWithData
-        .enter()
-        .append("g")
-        .attr("class", "arc");
-
-      const path = groupWithUpdate
-        .append("path")
-        .merge(groupWithData.select("path.arc"));
-
-      const arcTween = (d, i) => {
-        const interpolator = d3.interpolate(prevData[i], d);
-
-        return t => createArc(interpolator(t));
-      };
-
-      path
-        .attr("class", "arc")
-        .attr("fill", (d, i) => colors(i))
-        .transition()
-        .attrTween("d", arcTween);
-
-      const text = groupWithUpdate
-        .append("text")
-        .merge(groupWithData.select("text"));
-
-      text
-        .attr("text-anchor", "middle")
-        .attr("alignment-baseline", "middle")
-        .style("fill", "white")
-        .style("font-size", 10)
-        .transition()
-        .attr("transform", d => `translate(${createArc.centroid(d)})`)
-        .tween("text", (d, i, nodes) => {
-          const interpolator = d3.interpolate(prevData[i], d);
-
-          return t => d3.select(nodes[i]).text(format(interpolator(t).value));
-        });
-
-      cache.current = props.data;
-    },
-    [props.data]
-  );
-
-  return (
-    <svg width={props.width} height={props.height}>
-      <g
-        ref={ref}
-        transform={`translate(${props.outerRadius} ${props.outerRadius})`}
-      />
-    </svg>
-  );
-};
-
-export default Pie;
-```
-- このコードの意味は？
-  - このコードは、ReactとD3を使用して円グラフを描画するReactコンポーネントを定義しています。コンポーネントは、propsとして渡されたデータを元に、D3のpie()関数とarc()関数を使用して円グラフの描画に必要なデータを作成し、SVG要素に表示します。このコンポーネントはReactのuseEffectフックを使用して、props.dataの変更を検知し、データが変更された場合に円グラフを再描画します。コンポーネントには、propsとして以下の値が必要です。
-  data: 円グラフを描画するためのデータ
-  width: SVG要素の幅
-  height: SVG要素の高さ
-  innerRadius: 円グラフの内側の半径
-  outerRadius: 円グラフの外側の半径
-  円グラフの各セクションの色は、D3のscaleOrdinal関数を使用して自動的に割り当てられます。また、各セクションの値は、小数点以下2桁の精度で表示されます。
-  このコードは、D3を使用して動的なデータ可視化を作成する際に、Reactとの統合に役立ちます。
+- この記事を元に円グラフを書いて見ようと思ったが私には難しすぎた・・・
 ### サーバー側開発
 #### Node.jsの初期設定
 - 任意のフォルダでコマンドプロンプトで下記コマンドを実行してpackage.jsonを作る
