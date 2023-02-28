@@ -86,6 +86,16 @@ export default App;
 
 ### Git風のHeatmapを作成する
 - 色々ライブラリはあるが，ちゃんとD3.jsを使ってやってみる
+#### そもそもD3.jsとは？
+- D3.js(Data-Driven Documents)はデータをビジュアライズするためのJavascriptライブラリ
+- SVGを出力する
+#### いいサンプル
+- 日本国旗を書くサンプル
+  - https://jsbin.com/najaba/edit?html,js,output
+- 公式のギャラリー
+  - https://github.com/d3/d3/wiki/Gallery
+#### 基本
+- https://www.indetail.co.jp/blog/170517/
 #### D3.jsのインストール
 - Reactアプリ直下で以下コマンドを実行する
 ```
