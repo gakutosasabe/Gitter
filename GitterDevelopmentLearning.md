@@ -327,3 +327,7 @@ client.write(write_data, 1);
   - https://qiita.com/snaka/items/7f4e5653496689077ce5
 - React+D3.jsの基本
   - https://qiita.com/sand/items/4090fc9e93ff81180fdf
+- React＋mysql＋node.js
+  - https://teno-hira.com/media/?p=1537
+- D3.jsとReactを使う
+  - https://blog.logrocket.com/getting-started-d3-js-react/
