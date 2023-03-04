@@ -19,7 +19,6 @@ function App() {
   
   return (
     <div className="App">
-    <h1>Gitter</h1>
     <p>{ guiter_json }</p>
     <BarChart //BarChart関数を実行
       data= {[12,5,6,6,9,10]}
