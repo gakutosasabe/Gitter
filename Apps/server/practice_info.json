@@ -1,0 +1,62 @@
+[
+    {
+        "practice_status": "START",
+        "time": "2023/03/04 18:51:23.175"
+    },
+    {
+        "practice_status": "END",
+        "time": "2023/03/04 18:51:26.67"
+    },
+    {
+        "practice_status": "START",
+        "time": "2023/03/04 18:51:29.119"
+    },
+    {
+        "practice_status": "END",
+        "time": "2023/03/04 18:51:32.588"
+    },
+    {
+        "practice_status": "START",
+        "time": "2023/03/04 18:51:35.579"
+    },
+    {
+        "practice_status": "END",
+        "time": "2023/03/04 18:51:38.582"
+    },
+    {
+        "practice_status": "START",
+        "time": "2023/03/04 18:51:41.579"
+    },
+    {
+        "practice_status": "END",
+        "time": "2023/03/04 18:51:44.615"
+    },
+    {
+        "practice_status": "START",
+        "time": "2023/03/04 18:51:47.604"
+    },
+    {
+        "practice_status": "END",
+        "time": "2023/03/04 18:51:50.592"
+    },
+    {
+        "practice_status": "START",
+        "time": "2023/03/04 18:51:50.627"
+    },
+    {
+        "practice_status": "END",
+        "time": "2023/03/04 18:52:05.289"
+    },
+    {
+        "practice_status": "START",
+        "time": "2023/03/04 18:52:08.142"
+    },
+    {
+        "practice_status": "END",
+        "time": "2023/03/04 18:52:17.113"
+    },
+    {
+        "practice_status": "START",
+        "time": "2023/03/04 18:52:23.819"
+    }
+]

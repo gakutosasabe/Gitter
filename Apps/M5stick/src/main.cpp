@@ -1,20 +1,20 @@
 #include <M5stickCPlus.h>
 #include <Wifi.h>
 #include <Kalman.h>
-#include <time.h>
-#define JST     3600* 9
+//#include <time.h>
+//#define JST     3600* 9
 
 
 //自宅
-//const char* ssid = "IODATA-1ac424-2G";
-//const char* password = "ML1t276448355";
+const char* ssid = "IODATA-1ac424-2G";
+const char* password = "ML1t276448355";
 //らぼ
-const char* ssid = "ailabnet_2G";
-const char* password = "letsgettogether";
+//const char* ssid = "ailabnet_2G";
+//const char* password = "letsgettogether";
 
 const int port = 3002; //サーバー側ポート
-const IPAddress local_ip(192,168,1,17); //M5Stick IPAddress
-const IPAddress server_ip(192,168,1,113); //PC IPAdress
+const IPAddress local_ip(192,168,0,15); //M5Stick IPAddress
+const IPAddress server_ip(192,168,0,21); //PC IPAdress
 const IPAddress subnet(255,255,255,0);
 WiFiClient client;
 
@@ -37,8 +37,8 @@ bool guiterDetect = false; // 0がOFF,1がON
 bool lastGuiterDetect = false; //前回のギター検出情報
 
 //時刻取得関係
-time_t t;
-struct tm *tm;
+//time_t t;
+//struct tm *tm;
 
 //IMUからデータ取得
 void readGyro(){
@@ -78,25 +78,25 @@ bool detectGuiter(float angle){
 }
 
 //現在時刻取得
-String timeGet(){
-  t = time(NULL);
-  tm = localtime(&t);
-  String yyyy = String(tm->tm_year+1900);
-  String mm = String(tm->tm_mon+1);
-  String dd = String(tm->tm_mday);
-  String hh = String(tm->tm_hour);
-  String min = String(tm->tm_min);
-  String ss = String(tm->tm_sec);
-  String time = String(yyyy + "/" + mm + "/" + dd + " " + hh +":" + min + ":" + ss);
-  return time;
-}
+//String timeGet(){
+//  t = time(NULL);
+//  tm = localtime(&t);
+//  String yyyy = String(tm->tm_year+1900);
+//  String mm = String(tm->tm_mon+1);
+//  String dd = String(tm->tm_mday);
+//  String hh = String(tm->tm_hour);
+//  String min = String(tm->tm_min);
+//  String ss = String(tm->tm_sec);
+//  String time = String(yyyy + "/" + mm + "/" + dd + " " + hh +":" + min + ":" + ss);
+//  return time;
+//}
 
 //送信データ作成
 String dataCreate(bool detect_guiter){
   if(detect_guiter == false){
-    return String("OFF-" + timeGet());
+    return String("START");
   }else{
-    return String("ON-" + timeGet());
+    return String("END");
   }
 }
 
@@ -130,7 +130,7 @@ void setup() {
   M5.Lcd.println(WiFi.localIP());
 
   //時刻同期の設定
-  configTime( JST, 0, "ntp.nict.jp", "ntp.jst.mfeed.ad.jp");
+  //configTime( JST, 0, "ntp.nict.jp", "ntp.jst.mfeed.ad.jp");
 
   //サーバー接続
   M5.Lcd.print("\r\nLocal port: ");
@@ -155,7 +155,7 @@ void loop() {
   
   //20回に一回だけ描画
   tick++;
-  if(tick % 20 == 0){
+  if(tick % 5 == 0){
     tick = 0;
     draw();
   }
@@ -182,6 +182,6 @@ void loop() {
   //ギター検出情報を更新
   lastGuiterDetect = guiterDetect;
 
-  delay(200);
+  delay(2);
 }
 

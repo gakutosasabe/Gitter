@@ -9,7 +9,7 @@ class BarChart extends Component{
 
     drawChart(){
 
-        const data = this.props.data;
+        const data = this.props.data; //props = App.jsで入力したdata
 
         const svg = d3.select("body").append("svg")
             .attr("width", this.props.width)

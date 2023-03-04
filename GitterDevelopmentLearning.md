@@ -116,6 +116,14 @@ npm install d3 --save
 ```
 - https://zenn.dev/ignorant_kenji/articles/76dab0a748516470452b
 - この記事を元に円グラフを書いて見ようと思ったが私には難しすぎた・・・
+#### 画面設計
+- Figmaでプロトタイプ作るぞ～
+##### フレームの選択
+- https://liginc.co.jp/582225
+- 1920* 1080でいく
+##### Gitterアイコン作成
+- https://labs.openai.com/e/Memwh2DWACyRXsltXbNdtHsk
+- DALL-E-2画伯にお任せ
 ### サーバー側開発
 #### Node.jsの初期設定
 - 任意のフォルダでコマンドプロンプトで下記コマンドを実行してpackage.jsonを作る
@@ -331,3 +339,5 @@ client.write(write_data, 1);
   - https://teno-hira.com/media/?p=1537
 - D3.jsとReactを使う
   - https://blog.logrocket.com/getting-started-d3-js-react/
+- Reactでヒートマップ作るニキ
+  - https://dev.to/ashvin777/github-like-calendar-heatmap-contribution-summary-built-from-scratch-using-react-jsitor-fcm

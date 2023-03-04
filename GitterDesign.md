@@ -15,17 +15,20 @@
 ## M5stack⇔TCP/IPサーバー(Node.js)間
 | 項目 |値|行先|備考|
 |:--:|:--:|:--:|:--:|
-|ギター検出情報|ON/OFF-yyyy/mm/dd hh:mm:ss| M5→Express|ギター検出情報とタイムスタンプは一緒に送信|
+|練習検出情報|START/END|M5→Express|練習開始・終了情報とタイムスタンプは一緒に送信|
 |バッテリー容量|battery:〇〇| M5→Express||
 
 ## Expressサーバー(Node.js)⇔React間
 | 項目 |値|行先|
 |:--:|:--|:--:|
-|ギター練習情報|{<br>"guiter_detect":ON/OFF<br>"time_stamp":yyyy/mm/dd hh/mm/ss<br>}|Express→React|{"ID":aaaaaaa<br>"practice_start_time":2023/07/22 17:56:39 <br>"practice_end_time":2023/07/23 18:09:32}|
+|練習情報|{<br>"practice_status":START/END<br>"time_stamp":yyyy/mm/dd hh:mm:ss.mmm<br>}|Express→React|{"ID":aaaaaaa<br>"practice_start_time":2023/07/22 17:56:39 <br>"practice_end_time":2023/07/23 18:09:32}|
 |デバイス情報|{<br>"battery":バッテリー情報<br>}|Express→React|
 
 ## ギター検出情報保存ファイル（json)
 | 項目 |値|行先|例|
 |:--:|:--|:--:|:--|
-|ギター検出情報|{<br>"guiter_detect":ON/OFF<br>"time_stamp":yyyy/mm/dd hh/mm/ss<br>}|ローカルに保存|
+|練習情報|{<br>"practice_status":START/END<br>"time_stamp":yyyy/mm/dd hh:mm:ss.mmm<br>}|ローカルに保存|
 
+# 画面設計
+# デザイン図
+- https://www.figma.com/file/YPeIc900GOsdSCfJvz9jbA/Gitter-Web%E3%82%A2%E3%83%97%E3%83%AA?node-id=1126%3A9450&t=qhOplVa6hKExsTIF-0
