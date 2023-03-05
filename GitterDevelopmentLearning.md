@@ -341,3 +341,5 @@ client.write(write_data, 1);
   - https://blog.logrocket.com/getting-started-d3-js-react/
 - Reactでヒートマップ作るニキ
   - https://dev.to/ashvin777/github-like-calendar-heatmap-contribution-summary-built-from-scratch-using-react-jsitor-fcm
+- d3.jsでいい感じの棒グラフを書く
+  - https://qiita.com/nobuyuki-ishii/items/b65e742f2b0b35d2aeaf
