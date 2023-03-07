@@ -1,6 +1,7 @@
 import './App.css';
 import BarChart from './BarChart';
 import { useState,useEffect } from 'react';
+import SearchJson from'./SearchJson';
 
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
       //生成したjsオブジェクトをdataに代入
       //取り出したデータをuseStateに保存
       .then((data) => setJson(JSON.stringify(data)));
+      SearchJson.jsonToDateArray(data);
   });
   
   

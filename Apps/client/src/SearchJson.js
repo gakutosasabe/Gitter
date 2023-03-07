@@ -8,7 +8,7 @@ class JsonSearch{
         var last_status;
         let array = [[]];
 
-        json.forEach(obj =>  {
+        data.forEach(obj =>  {
             const status = obj.practice_status;
             const strtime = obj.time;
             const time = newDate(strtime);
@@ -17,25 +17,32 @@ class JsonSearch{
                 var diff = time.getTime() - last_time.getTime();
                 //分に直す
                 var diff_minutes = Math.abs(diff) / (60 * 1000);
-                var date = time.getFullYear()
+                var dates = time.getFullYear()
                 + '/' + ('0' + (time.getMonth() + 1)).slice(-2)
                 + '/' + ('0' + time.getDate()).slice(-2);
 
-                //配列にPush
-                array.push([date,diff_minutes]);
+                
+                array.forEach(function(value,index){
+                    if(dates == value[0]){ //日付が一緒なら練習時間を加算
+                        value[1] = value[1] + diff_minutes;
+                    }else{
+                        //日付が違えば配列に追加
+                        array.push([date,diff_minutes]);
+                    }
+                })
 
+                last_time = time;
+                last_status = status;
 
             }else{
                 last_time = time;
                 last_status = status;
             }
         });
-
-
-
-    
         
         return array;
     }
 
 }
+
+export default SearchJson;

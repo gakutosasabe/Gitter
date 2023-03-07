@@ -32,3 +32,7 @@
 # 画面設計
 # デザイン図
 - https://www.figma.com/file/YPeIc900GOsdSCfJvz9jbA/Gitter-Web%E3%82%A2%E3%83%97%E3%83%AA?node-id=1126%3A9450&t=qhOplVa6hKExsTIF-0
+
+-　一旦こんな感じを目指す
+  
+  ![design](20230305230629.png)
