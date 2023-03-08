@@ -1,6 +1,6 @@
 
 
-class JsonSearch{
+class SearchJson{
 
     //Jsonから[日付,練習時間[分]]の配列にして返す
     jsonToDateArray(data){
@@ -11,7 +11,7 @@ class JsonSearch{
         data.forEach(obj =>  {
             const status = obj.practice_status;
             const strtime = obj.time;
-            const time = newDate(strtime);
+            const time = new Date(strtime);
             if(last_status == "START" && status == "END"){
                 //時間の差分を出す
                 var diff = time.getTime() - last_time.getTime();
@@ -27,7 +27,7 @@ class JsonSearch{
                         value[1] = value[1] + diff_minutes;
                     }else{
                         //日付が違えば配列に追加
-                        array.push([date,diff_minutes]);
+                        array.push([dates,diff_minutes]);
                     }
                 })
 
