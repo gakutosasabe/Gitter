@@ -15,19 +15,22 @@ class SearchJson{
             if(last_status == "START" && status == "END"){
                 //時間の差分を出す
                 var diff = time.getTime() - last_time.getTime();
-                //分に直す
-                var diff_minutes = Math.abs(diff) / (60 * 1000);
+                //秒に直す
+                var diff_minutes = Math.abs(diff) / (1000);
                 var dates = time.getFullYear()
                 + '/' + ('0' + (time.getMonth() + 1)).slice(-2)
                 + '/' + ('0' + time.getDate()).slice(-2);
+                //ここまではいけてそう
 
                 
                 array.forEach(function(value,index){
+
                     if(dates == value[0]){ //日付が一緒なら練習時間を加算
                         value[1] = value[1] + diff_minutes;
                     }else{
                         //日付が違えば配列に追加
                         array.push([dates,diff_minutes]);
+                        console.log(array);
                     }
                 })
 
@@ -39,7 +42,6 @@ class SearchJson{
                 last_status = status;
             }
         });
-        
         return array;
     }
 
