@@ -21,18 +21,24 @@ class SearchJson{
                 + '/' + ('0' + (time.getMonth() + 1)).slice(-2)
                 + '/' + ('0' + time.getDate()).slice(-2);
                 //ここまではいけてそう
-
                 
-                array.forEach(function(value,index){
+                var detect = false;
 
-                    if(dates == value[0]){ //日付が一緒なら練習時間を加算
-                        value[1] = value[1] + diff_minutes;
-                    }else{
-                        //日付が違えば配列に追加
-                        array.push([dates,diff_minutes]);
-                        console.log(array);
+                for(let i=0; i<array.length; i++){
+                    if(array[i][0] == dates){
+                        array[i][1] += diff_minutes;
+                        detect = true;
+                        break;
                     }
-                })
+                }
+
+                if(detect == false){//追加先の日付が見つからなかったら
+                    if(array.length == 1){
+                        array[0] = [dates,diff_minutes];
+                    }else{
+                    array.push([dates,diff_minutes]);
+                    }
+                }
 
                 last_time = time;
                 last_status = status;
