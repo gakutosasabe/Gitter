@@ -3,7 +3,6 @@ import BarChart from './BarChart';
 import { useState,useEffect } from 'react';
 import SearchJson from'./SearchJson';
 
-var data;
 
 function App() {
   //useStateの初期値(空)を設定
@@ -26,18 +25,15 @@ function App() {
     if (practice_array) {
       const searchjson = new SearchJson();
       searchjson.jsonToDateArray(practice_array);
+      //setData(darray);
     }
-  }, [practice_array]);
+  });
   
   
   return (
     <div className="App">
     <p>{ guiter_json }</p>
-  
-    <BarChart //BarChart関数を実行
-      data= {[70,60,30,40,60]}
-      width = {700}
-      height = {300}/>  
+
     </div>
   );
 }

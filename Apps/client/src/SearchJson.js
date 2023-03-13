@@ -47,6 +47,7 @@ class SearchJson{
                 last_time = time;
                 last_status = status;
             }
+            console.log(array);
         });
         return array;
     }
