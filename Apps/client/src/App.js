@@ -7,7 +7,8 @@ import SearchJson from'./SearchJson';
 function App() {
   //useStateの初期値(空)を設定
   const [guiter_json, setJson] = useState('');
-  const [practice_array, setData] = useState('');
+  const searchjson = new SearchJson();
+  var practice_array;
 
   useEffect(() => {
     //fetchでバックエンドExpressのサーバーを指定
@@ -17,23 +18,16 @@ function App() {
       //取り出したデータをuseStateに保存
       .then((data) => {
         setJson(JSON.stringify(data));
-        setData(data);
+        practice_array = searchjson.jsonToDateArray(data);
+        console.log(practice_array);
       });
   });
-
-  useEffect(() => {
-    if (practice_array) {
-      const searchjson = new SearchJson();
-      searchjson.jsonToDateArray(practice_array);
-      //setData(darray);
-    }
-  });
   
-  
+  //returnの段階ではpractice_arrayはundefinedになっている
   return (
     <div className="App">
     <p>{ guiter_json }</p>
-
+    <p>{console.log(practice_array)}</p> 
     </div>
   );
 }
