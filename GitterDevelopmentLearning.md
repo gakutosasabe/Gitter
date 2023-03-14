@@ -345,3 +345,38 @@ client.write(write_data, 1);
   - https://qiita.com/nobuyuki-ishii/items/b65e742f2b0b35d2aeaf
 - Javascriptで時間の差分を出す
   - https://gray-code.com/javascript/calculate-the-difference-between-two-dates-and-times/
+
+
+- Reactの実行タイミングについて
+  - このコードで最後のpractice_arrayがundefinedになるのは、ReactのライフサイクルとJavaScriptの非同期処理の動作に関係があるためです。
+
+useEffect フックは、コンポーネントの描画が完了した後に実行される非同期処理です。また、useEffect内で定義された変数は、useEffectのスコープ内でのみ有効であり、コンポーネントのスコープ外では使用できないため、practice_arrayはApp関数のスコープ外で未定義のままになります。
+
+また、useEffectフック内で非同期処理が完了した後に、practice_arrayにデータがセットされますが、その前にコンポーネントの描画が完了してしまうため、最初のレンダリング時には、practice_arrayはundefinedのままになります。
+
+したがって、practice_arrayを使用する箇所をuseEffectの中に移動し、useStateで定義して、その値をレンダリングするように変更することで、この問題を解決できます。例えば、以下のように修正することができます。
+
+scss
+Copy code
+function App() {
+  const [guiter_json, setJson] = useState('');
+  const [practice_array, setPracticeArray] = useState([]);
+
+  useEffect(() => {
+    fetch('/api')
+      .then((res) => res.json())
+      .then((data) => {
+        setJson(JSON.stringify(data));
+        const arr = new SearchJson().jsonToDateArray(data);
+        setPracticeArray(arr);
+      });
+  }, []);
+
+  return (
+    <div className="App">
+      <p>{guiter_json}</p>
+      <p>{console.log(practice_array)}</p>
+    </div>
+  );
+}
+上記の修正により、practice_arrayがAppコンポーネントのスコープ内でuseStateで定義され、またuseEffect内で更新されるため、正常に値を取得できるようになります。また、useEffect内で取得したデータをもとに、レンダリングされるコンポーネントの状態を更新することで、非同期処理とレンダリングのタイミングの不整合を解消することができます。
