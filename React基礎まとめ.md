@@ -58,3 +58,45 @@ const func3 = (num1, num2) => {
 console.log(func3(10,20));
 //結果:30
 ```
+
+## 分割代入
+- こんな感じでオブジェクトの中を参照できる
+``` javascript
+const myProfile = {
+  name : "じゃけぇ",
+  age : 28,
+};
+
+const {name, age} = myProfile;
+const message2 = `名前は${name}です．年齢は${age}歳です`
+console.log(message2);
+
+```
+- 配列にも使える
+``` javascript
+const myProfile = ['じゃけぇ', 28];
+
+const [name, age] = myProfile;
+const message4 = `名前は${name}です．年齢は${age}です．`
+console.log(message4);
+```
+
+## デフォルト値
+- 引数にデフォルト値を設定できる
+``` javascript
+const sayHello = (name = "ゲスト") => console.log(`こんにちは${name}さん`);
+sayHello();
+//こんにちはゲストさん
+```
+
+## スプレッド構文
+### 配列の展開
+- 要素が順番に展開される（配列が展開される）
+```javascript
+
+const sumFunc = (num1,num2) => console.log(num1 + num2);
+sumFunc(arr1[0],arr1[1]);
+sumFunc(...arr1);
+```
+### 配列をまとめる
+
