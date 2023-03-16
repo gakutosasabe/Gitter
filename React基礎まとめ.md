@@ -99,4 +99,87 @@ sumFunc(arr1[0],arr1[1]);
 sumFunc(...arr1);
 ```
 ### 配列をまとめる
+```javascript
+const arr2 = [1,2,3,4,5];
+const [num1, num2, ...arr3] = arr2;
+console.log(num1);
+console.log(num2);
+console.log(arr3);
+//arr3 = [3,4,5];
+```
+
+### 配列のコピー，結合
+``` javascript
+const arr4 = [10,20];
+const arr5 = [30,40];
+
+const arr6 = [...arr4]; //配列のコピー
+const arr7 = [...arr4, ...arr5]; //配列の結合
+```
+
+### mapやfilterを使った配列の処理
+#### map
+```javascript
+
+const nameArr = ["田中","山田","じゃけぇ"];
+
+for (let index = 0; index < nameArr.length; index ++){
+  console.log(nameArr[index]);
+}
+
+const nameArr2 = nameArr.map((name)=>{
+  return name;
+})
+//順番に走査してくれる
+
+nameArr.map((name) => console.log(name));//for文と一緒
+```
+
+- indexも取れる
+```javascript
+nameArr.map((name, index) => console.log(name + index));//indexには〇番目が入ってくる
+```
+#### filter
+```javascript
+const numArr = [1,2,3,4,5];
+const newNumArr = numArr.filter((num) => {
+  return num % 2 === 0; //奇数のものだけ返す
+});
+```
+
+### 三項演算子
+- ある条件 ? 条件がtrueの時：条件がfalseの時
+``` javascript
+const val1 = 1 > 0? 'trueです' : 'falseです';
+
+const num = "1300";
+const formattedNum = typeof num === 'number'? num.toLocaleString() : '数値を入力してください';
+```
+
+### 論理演算し
+- ||は左側がfalseなら右を返す
+```javascript
+const num = 100;
+const fee = num || "金額未設定です";
+cosole.log(fee); //100
+```
+- &&は左側がtrueなら右を返す
+
+# Reactの基礎
+- index.htmlのrootに差し込む
+- renderでHtmlに要素を入れていく
+- javascriptの中でHTMLをリターンするのがJSX記法
+- returnの中は一つのタグで囲われてなくてはならない
+``` javascript
+ return (
+  <div>
+    <h1>こんにちは！</h1>
+    <p>お元気ですか？</p>
+  </div>
+ )
+```
+## コンポーネントの使い方
+
+
+
 
