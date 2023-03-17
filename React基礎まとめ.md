@@ -178,8 +178,70 @@ cosole.log(fee); //100
   </div>
  )
 ```
-## コンポーネントの使い方
+##　Reactでのボタンの作りかた
+- こんな感じ↓
+``` javascript
+import React from "react";
 
+const App = () => {
+  const onClickButton = () => alert();
+  return (
+    <>
+      <h1>こんにちは！</h1>
+      <button onClick={onClickButton}>ボタン</button>
+    </>
+  );
+};
 
+export default App;
+```
 
+## Props
+- コンポーネントに渡す引数的なもの
+- コンポーネント：画面要素の一単位
+- HTMLの中でJavascriptを使うときは{}を使う
 
+- 使用例↓
+```javascript
+import React from "react";
+import ColorfulMessage from "./components/Colorfulmessage";
+
+const App = () => {
+  const onClickButton = () => alert();
+
+  return (
+    <>
+      <h1>こんにちは！</h1>
+      <ColorfulMessage color="blue" message="お元気ですか？" />
+      <ColorfulMessage color="pink" message="お元気です!" />
+    </>
+  );
+};
+
+export default App;
+```
+- Colorfulmessage.jsx
+```javascript
+import React from "react";
+
+const ColorfulMessage = (props) => {
+  const contentStyle = {
+    color: props.color,
+    fontSize: "18px"
+  };
+  return <p style={contentStyle}>{props.message}</p>;
+};
+
+export default ColorfulMessage;
+```
+- 子要素を指定してやってもいい(props.children)
+
+## State
+- 各コンポーネントがもつ状態
+- useStateを使う
+  - 配列から取り出す第一がステート変数名
+  - 第２がその状態を実行する関数名
+- 動的に変わる部分はuseStateで定義して変数と更新関数と初期値を設定していく！！
+```javascript
+  const [num, setNum] = useState(0);//0は初期値
+```
