@@ -245,3 +245,22 @@ export default ColorfulMessage;
 ```javascript
   const [num, setNum] = useState(0);//0は初期値
 ```
+## 再レンダリング
+- Reactは特定の条件でコンポーネントを再レンダリングして差分を反映することで動的な表現を実現している
+  - コンポーネントのStateが変更したとき
+  - propsの中身が変わった場合
+  - 親のコンポーネントが再レンダリングされた場合（例えば呼び出し元のコンポーネントのStateが変わった場合など）
+
+## UseEffect
+- UseEffectの第２引数には配列を取る
+```javascript
+  useEffect(() => {
+    console.log("UseEffect!!!");
+  }, []);
+```
+- ↑の場合，レンダリング後最初の一度だけUseEffect!!が表示される
+- 第2引数の配列の中に値を設定すると，その配列が変化したときだけ，useEffectの中を通る
+- ある変数の状態に応じて何かをしたいときはUseEffectを使う
+- 処理の回数を分離できる
+
+
