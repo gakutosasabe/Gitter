@@ -12,13 +12,17 @@ class BarChart extends Component{
         var width = this.props.width;
         var height = this.props.height;
         const dataset = this.props.dataset;
+        console.log(dataset);
+        console.log(width);
+        console.log(height);
         var bar_width = 20;
         var bar_padding = 1;
         
         var svg = d3.select("body")
                     .append("svg")
-                    .attr("width", width)
-                    .attr("height", height);
+                    .attr("width", 300)
+                    .attr("height", 700)
+                    .attr("transform","translate(100,200)");
 
         svg.selectAll("rect")
             .data(dataset)
