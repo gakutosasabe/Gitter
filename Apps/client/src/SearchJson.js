@@ -16,7 +16,7 @@ class SearchJson{
                 //時間の差分を出す
                 var diff = time.getTime() - last_time.getTime();
                 //秒に直す
-                var diff_minutes = Math.abs(diff) / (1000);
+                var diff_minutes = Math.floor((Math.abs(diff) / 1000) *10)/10;
                 var dates = time.getFullYear()
                 + '/' + ('0' + (time.getMonth() + 1)).slice(-2)
                 + '/' + ('0' + time.getDate()).slice(-2);
@@ -26,7 +26,10 @@ class SearchJson{
 
                 for(let i=0; i<array.length; i++){
                     if(array[i][0] == dates){
+                        console.log(diff_minutes);
                         array[i][1] += diff_minutes;
+                        array[i][1] = Math.floor(array[i][1] *10)/10; //ゴミが残るのでもう一度切り捨て
+                        console.log(array[i][1]);
                         detect = true;
                         break;
                     }
@@ -47,7 +50,6 @@ class SearchJson{
                 last_time = time;
                 last_status = status;
             }
-            console.log(array);
         });
         return array;
     }

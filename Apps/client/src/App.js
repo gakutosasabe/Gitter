@@ -27,7 +27,7 @@ function App() {
   //returnの段階ではpractice_arrayはundefinedになっている
   return (
     <div className="App">
-    <p>{ guiter_json }</p>
+    <p style={{"background-color":"##D9D9D9"}}>{ guiter_json }</p>
     <p>{console.log(practice_array)}</p>
     {practice_array &&
     <BarChart //BarChart関数を実行
