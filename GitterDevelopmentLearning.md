@@ -126,6 +126,12 @@ npm install d3 --save
 - 時間ごとのOverViewとかはこの人がよさげ（第２ステップかな？）
   - https://github.com/g1eb/calendar-heatmap
 
+#### npm経由でインストール
+- https://github.com/uiwjs/react-heat-map
+```
+npm install @uiw/react-heat-map --save
+```
+
 #### 画面設計
 - Figmaでプロトタイプ作るぞ～
 ##### フレームの選択
