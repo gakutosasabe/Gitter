@@ -3,6 +3,8 @@ import BarChart from './BarChart';
 import { useState,useEffect } from 'react';
 import SearchJson from'./SearchJson';
 import HeatMap from '@uiw/react-heat-map';
+import Tooltip from '@uiw/react-tooltip';
+
 
 
 function App() {
@@ -41,7 +43,31 @@ function App() {
     <div className="App">
     <p style={{"background-color":"##D9D9D9"}}>{ guiter_json }</p>
     <p>{console.log(practice_array)}</p>
-    <HeatMap value={value} startDate={new Date('2016/01/01')} />
+    <p style={{"background-color":"##D9D9D9"}}>
+      <HeatMap
+        value={value}
+        width={600}
+        rectSize={14}
+        style={{ color: '#ad001d' }}
+        startDate={new Date('2016/01/01')}
+        panelColors={{
+          0: '#f4decd',
+          2: '#e4b293',
+          4: '#d48462',
+          10: '#c2533a',
+          20: '#ad001d',
+          30: '#000',
+        }}
+        rectRender={(props, data) => {
+          // if (!data.count) return <rect {...props} />;
+          return (
+            <Tooltip key={props.key} placement="top" content={`practicetime: ${data.count || 0}minute`}>
+              <rect {...props} />
+            </Tooltip>
+          );
+        }}
+      />
+    </p>
     {practice_array &&
     <BarChart //BarChart関数を実行
       dataset = {practice_array}

@@ -131,6 +131,9 @@ npm install d3 --save
 ```
 npm install @uiw/react-heat-map --save
 ```
+```
+npm install @uiw/react-tooltip --save
+```
 
 #### 画面設計
 - Figmaでプロトタイプ作るぞ～
