@@ -6,7 +6,7 @@ class SearchJson{
     jsonToDateArray(data){
         var last_time;
         var last_status;
-        let array = [[]];
+        let array = [];
 
         data.forEach(obj =>  {
             const status = obj.practice_status;
@@ -25,11 +25,11 @@ class SearchJson{
                 var detect = false;
 
                 for(let i=0; i<array.length; i++){
-                    if(array[i][0] == dates){
+                    if(array[i].date == dates){
                         console.log(diff_minutes);
-                        array[i][1] += diff_minutes;
-                        array[i][1] = Math.floor(array[i][1] *10)/10; //ゴミが残るのでもう一度切り捨て
-                        console.log(array[i][1]);
+                        array[i].count += diff_minutes;
+                        array[i].count = Math.floor(array[i][1] *10)/10; //ゴミが残るのでもう一度切り捨て
+                        console.log(array[i].count);
                         detect = true;
                         break;
                     }
@@ -37,9 +37,9 @@ class SearchJson{
 
                 if(detect == false){//追加先の日付が見つからなかったら
                     if(array.length == 1){
-                        array[0] = [dates,diff_minutes];
+                        array[0] = {date: dates, count :diff_minutes};
                     }else{
-                    array.push([dates,diff_minutes]);
+                    array.push({date: dates,count: diff_minutes});
                     }
                 }
 
@@ -51,6 +51,7 @@ class SearchJson{
                 last_status = status;
             }
         });
+        console.log(array);
         return array;
     }
 
