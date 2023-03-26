@@ -49,11 +49,11 @@ class BarChart extends Component{
                 return i * (bar_width + 1) + W_padding;
             })
             .attr("y", function(d,i){
-                return H - scale(d[1]) + H_padding;
+                return H - scale(d.count) + H_padding;
             }) //y座標
             .attr("width", bar_width)
             .attr("height", function(d){
-                return scale(d[1]); //datasetの中の一番目の要素(練習時間) * 10倍を高さとする
+                return scale(d.count); //datasetの中の一番目の要素(練習時間) * 10倍を高さとする
             })
             .attr("style","fill:red");
         
@@ -63,14 +63,14 @@ class BarChart extends Component{
             .enter()
             .append("text")
             .text(function(d){
-                return d[1];
+                return d.count;
             })
             .attr("text-anchor","middle")
             .attr("x", function(d,i){
                 return i*(20 + 1) + 10 + W_padding;
             })
             .attr("y", function(d){
-                return H - scale(d[1]) + 15 + H_padding;
+                return H - scale(d.count) + 15 + H_padding;
             })
             .attr("font-size","10px")
             .attr("fill", "white");

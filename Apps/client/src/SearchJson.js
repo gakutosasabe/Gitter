@@ -28,7 +28,7 @@ class SearchJson{
                     if(array[i].date == dates){
                         console.log(diff_minutes);
                         array[i].count += diff_minutes;
-                        array[i].count = Math.floor(array[i][1] *10)/10; //ゴミが残るのでもう一度切り捨て
+                        array[i].count = Math.floor(array[i].count *10)/10; //ゴミが残るのでもう一度切り捨て
                         console.log(array[i].count);
                         detect = true;
                         break;

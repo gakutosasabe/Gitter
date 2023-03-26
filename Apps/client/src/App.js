@@ -13,16 +13,16 @@ function App() {
   const [practice_array,setPracticeArray] = useState();
   const searchjson = new SearchJson();
 
-  const value = [
-    { date: '2016/01/11', count: 2 },
-    { date: '2016/01/12', count: 20 },
-    { date: '2016/01/13', count: 10 },
-    ...[...Array(17)].map((_, idx) => ({ date: `2016/02/${idx + 10}`, count: idx, content: '' })),
-    { date: '2016/04/11', count: 2 },
-    { date: '2016/05/01', count: 5 },
-    { date: '2016/05/02', count: 5 },
-    { date: '2016/05/04', count: 11 },
-  ];
+  // const value = [
+  //   { date: '2016/01/11', count: 2 },
+  //   { date: '2016/01/12', count: 20 },
+  //   { date: '2016/01/13', count: 10 },
+  //   ...[...Array(17)].map((_, idx) => ({ date: `2016/02/${idx + 10}`, count: idx, content: '' })),
+  //   { date: '2016/04/11', count: 2 },
+  //   { date: '2016/05/01', count: 5 },
+  //   { date: '2016/05/02', count: 5 },
+  //   { date: '2016/05/04', count: 11 },
+  // ];
 
   useEffect(() => {
     //fetchでバックエンドExpressのサーバーを指定
@@ -45,11 +45,11 @@ function App() {
     <p>{console.log(practice_array)}</p>
     <p style={{"background-color":"##D9D9D9"}}>
       <HeatMap
-        value={value}
+        value={practice_array}
         width={600}
         rectSize={14}
         style={{ color: '#ad001d' }}
-        startDate={new Date('2016/01/01')}
+        startDate={new Date('2023/01/01')}
         panelColors={{
           0: '#f4decd',
           2: '#e4b293',
