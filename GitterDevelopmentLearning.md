@@ -365,4 +365,9 @@ client.write(write_data, 1);
 - Javascriptで時間の差分を出す
   - https://gray-code.com/javascript/calculate-the-difference-between-two-dates-and-times/
 
-
+## Todo
+- 見た目を整える 3/31
+- ChatGPTと連携
+- 収納ケースを設計 4/5
+- 一連の動作を試す 4/9
+- 動画を取る 4/14
