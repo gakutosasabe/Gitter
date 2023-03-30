@@ -64,6 +64,81 @@ code {
   background: #D9D9D9;
 }
 
+#heatmap{
+  box-sizing: border-box;
+  position: absolute;
+  width: 1288px;
+  height: 347.15px;
+  left: 26px;
+  top: 148px;
+
+  background: #D9D9D9;
+  border: 0.90513px solid rgba(0, 0, 0, 0.1);
+  border-radius: 1.53608px;
+}
+#heatmapbg{
+  position: absolute;
+  width: 1244px;
+  height: 217px;
+  left: 23px;
+  top: 45px;
+
+  background: #FFFFFF;
+}
+#practicestatus{
+  position: absolute;
+  width: 219.66px;
+  height: 19.2px;
+  left: 10.75px;
+  top: 13.06px;
+
+  font-family: 'Goblin One';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18.896px;
+  line-height: 28px;
+  /* or 150% */
+
+  display: flex;
+  align-items: center;
+  text-align: center;
+
+  color: #000000;
+}
+
+#weekly{
+  box-sizing: border-box;
+  position: absolute;
+  width: 651px;
+  height: 357px;
+  left: 26px;
+  top: 526px;
+  border: 0.90513px solid rgba(0, 0, 0, 0.1);
+  border-radius: 1.53608px;
+  background: #E5E5E5;
+}
+
+#weeklystatus{
+  position: absolute;
+  width: 219.66px;
+  height: 19.2px;
+  left: 10.75px;
+  top: 13.06px;
+
+  font-family: 'Goblin One';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18.896px;
+  line-height: 28px;
+  /* or 150% */
+
+  display: flex;
+  align-items: center;
+  text-align: center;
+
+  color: #000000;
+}
+
 #root{
   position:absolute;
   top: 300px;
