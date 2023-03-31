@@ -41,19 +41,19 @@ function App() {
   //returnの段階ではpractice_arrayはundefinedになっている
   return (
     <div className="App" style={{ position: 'relative' }}>
-    <p style={{"backgroundColor":"##D9D9D9"}}>{ guiter_json }</p>
+    {/* <p>{ guiter_json }</p> */}
     <p>{console.log(practice_array)}</p>
     <HeatMap
       style={{ 
         backgroundColor:'##d9d9d9',
         color: '#ad001d',
         position: 'absolute', 
-        top: '300px', 
-        left: '100px' }}
+        top: '185px', 
+        left: '60px' }}
       value={practice_array}
-      width={600}
-      height ={1000}
-      rectSize={14}
+      width={1200}
+      height ={300}
+      rectSize={20}
       startDate={new Date('2023/01/01')}
       panelColors={{
         0: '#f4decd',
@@ -75,8 +75,8 @@ function App() {
     {practice_array &&
     <BarChart //BarChart関数を実行
       dataset = {practice_array}
-      width = {700}
-      height = {300}
+      width = {600}
+      height = {280}
     />
     }
     </div>

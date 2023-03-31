@@ -35,8 +35,8 @@ class BarChart extends Component{
                     .append("svg")
                     .attr("width", width)
                     .attr("height", height)
-                    .attr("transform","translate(100,200)")//SVG自体の場所を移動
-                    .style("background-color","#D9D9D9");
+                    .attr("transform","translate(50,575)")//SVG自体の場所を移動
+                    .style("background-color","#FFFFFF");
 
         //バーの追加
         svg.selectAll("rect")
