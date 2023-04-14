@@ -57,11 +57,11 @@ function App() {
       startDate={new Date('2023/01/01')}
       panelColors={{
         0: '#f4decd',
-        2: '#e4b293',
-        4: '#d48462',
-        10: '#c2533a',
-        20: '#ad001d',
-        30: '#000',
+        1: '#e4b293',
+        10: '#d48462',
+        30: '#c2533a',
+        80: '#ad001d',
+        120: '#000',
       }}
       rectRender={(props, data) => {
         // if (!data.count) return <rect {...props} />;

@@ -14,7 +14,7 @@ const char* password = "ML1t276448355";
 
 const int port = 3002; //サーバー側ポート
 const IPAddress local_ip(192,168,0,15); //M5Stick IPAddress
-const IPAddress server_ip(192,168,0,21); //PC IPAdress
+const IPAddress server_ip(192,168,0,31); //PC IPAdress
 const IPAddress subnet(255,255,255,0);
 WiFiClient client;
 
@@ -155,7 +155,7 @@ void loop() {
   
   //20回に一回だけ描画
   tick++;
-  if(tick % 5 == 0){
+  if(tick % 20 == 0){
     tick = 0;
     draw();
   }
