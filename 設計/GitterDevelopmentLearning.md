@@ -332,6 +332,34 @@ client.write(write_data, 1);
 #### ArduinoStringからCharへの変換
 - https://doubtpad.hatenablog.com/entry/2020/09/28/015028
 - stringからCharへ変換するときは長さを＋１する必要があるらしい
+
+## AWS移行
+- 現在のGitterではサーバー用のPCを常に起動しておく必要があるが，ユーザービリティを考えるとサーバーレスが望ましい
+- よって，ReactによるHMIの部分とNode.jsのサーバー側の部分をAWSに移行する
+- これができれば，ユーザーはM5stackを用意し, Wifi情報を入力するだけでGitterを使用することができるはず
+- 以下を参考にAWS移行を行う
+  - https://www.handsonplus.com/web-designing/how-to-use-aws-ec2-with-nodejs/
+
+### インスタンスの起動
+- 下記画面からEC2インスタンスを起動する
+![](20230421131941.png)
+
+
+- AWSマネジメントコンソールからEC2を起動
+
+- Amazon Linux 2を選択
+
+- インスタンスタイプ：t2.micro
+
+- キーペア作成：RSA pem
+
+セキュリティグループを作成する。自分のIP。HTTP、TCPトラフィックを許可。 3000: XSAウェブアプリのHTTPリクエストポート
+60001: クナイデバイスのTCPサーバーポート
+60002: スタブアプリのWebsocketサーバーポート
+security_group
+
+- インスタンスの起動を押下
+
 ## 参考情報
 - Node.jsとArduinoでプロトタイプ作成
   - https://html5experts.jp/girlie_mac/17684/
